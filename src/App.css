@@ -10,7 +10,7 @@ main {
 }
 
 .App-background {
-  background-image: url('/public/background.png');
+  background-image: url('/public/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
