@@ -1,0 +1,19 @@
+.login-form {
+  background-color: white;
+  border-radius: 0.25rem;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.login-form label {
+  font-weight: bold;
+}
+
+.full-width-button {
+  width: 100%;
+}
+
+.form-alert {
+  margin-top: 10px;
+}

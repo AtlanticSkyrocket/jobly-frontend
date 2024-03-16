@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 
 import { useUserContext } from './UserContext';
-import JoblyApi from './api';
+
+import './LoginForm.css';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -32,9 +33,11 @@ const LoginForm = () => {
 
 
   return (
-    <div>
-      <h2>Login Form</h2>
-      <Form onSubmit={handleSubmit}>
+    <Row className="align-self-center">
+    <Col md="3"/>
+    <Col>
+      <h2>Log In</h2>
+      <Form className="login-form" onSubmit={handleSubmit}>
         <FormGroup>
           <Label for="username">Username</Label>
           <Input
@@ -57,10 +60,12 @@ const LoginForm = () => {
             onChange={handleChange}
           />
         </FormGroup>
-        <Button type="submit">Submit</Button>
+        <Button className="full-width-button" color="primary" type="submit">Submit</Button>
       </Form>
-      {message && <p>{message}</p>}
-    </div>
+      {message && message !== '' && <Alert className="form-alert">{message}</Alert>}
+    </Col>
+    <Col md="3"/>
+    </Row>
   );
 };
 

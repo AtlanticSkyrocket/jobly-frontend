@@ -29,16 +29,14 @@ const CompanyDetails = () => {
   }
 
   return (
-    <div>
+    <div className='col-md-8'>
       <h1>{company.name}</h1>
       <p>{company.description}</p>
-      <ListGroup className='CompanyDetails-jobs'>
+      <div className='CompanyDetails-jobs'>
         {company.jobs && company.jobs.map((job) => (
-          <ListGroupItem key={job.id}>
             <JobCard job={job} />
-          </ListGroupItem>
         ))}
-      </ListGroup>
+      </div>
     </div>
   );
 };

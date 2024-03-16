@@ -10,7 +10,7 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import NavBar from "./NavBar";
 import Profile from "./Profile";
-import { Col, Row } from "reactstrap";
+import { Container, Col, Row } from "reactstrap";
 
 import './App.css';
 
@@ -20,9 +20,10 @@ function App() {
       <div className="App">
         <NavBar />
         <div className="App-background">
-        <div className="container">
-          <Row className="justify-content-center">
+        <Container>
+          <Row>
             <Col md="1"/>
+            <Row className="justify-content-center">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/companies/:handle" element={<ProtectedRoute><CompanyDetails /></ProtectedRoute>} />
@@ -32,9 +33,10 @@ function App() {
                 <Route path="/signup" element={<SignupForm />} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
               </Routes>
+            </Row>
               <Col md="1"/>
           </Row>
-        </div>
+        </Container>
         </div>
       </div>
     </UserProvider>

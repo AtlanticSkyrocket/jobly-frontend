@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Form, FormGroup, Input, Button, Col, Row } from 'reactstrap';
+import { Form, Input, Button, Col, Row } from 'reactstrap';
 import { Alert } from 'reactstrap';
 
-import JoblyApi from './api';
 import './SearchForm.css';
 
 const SearchForm = ({ filterList}) => {
@@ -31,9 +30,11 @@ const SearchForm = ({ filterList}) => {
 
   return (
     <section>
+      <Row className="justify-content-center">
+        <Col md={10}>
       <Form className="SearchForm" onSubmit={handleSubmit}>
         <Row className="row-cols-lg-auto g-3 align-items-center">
-          <Col md={10}>
+          <Col md={9}>
             <Input
               type="text"
               name="searchFor"
@@ -43,12 +44,14 @@ const SearchForm = ({ filterList}) => {
               onChange={handleInputChange}
             />
           </Col>
-          <Col md={2}>
+          <Col md={3}>
             <Button type="submit">Search</Button>
           </Col>
         </Row>
       </Form>
       {error && <Alert color="danger">There was an unexpected error</Alert>}
+      </Col>
+      </Row>
     </section>
   );
 };

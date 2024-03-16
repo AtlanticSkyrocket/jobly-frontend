@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText  } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText  } from 'reactstrap';
 
 import SearchForm from './SearchForm';
 
@@ -34,22 +34,18 @@ const CopanyList = () => {
   }, []);
 
   return (
-    <section className='col-md-10'>
+    <section className='col-md-8'>
       <SearchForm filterList={searchCompanyList}/>
-        <ListGroup className='CompanyList-company'>
-          {companies.map((company) => (
-            <ListGroupItem className='CompanyList-item' key={company.handle}
-              action
-              to={`/companies/${company.handle}`}
-              tag={Link}
-            >
-              <ListGroupItemHeading>{company.name}</ListGroupItemHeading>
-              <ListGroupItemText>
-                {company.description}
-              </ListGroupItemText>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
+      <div className='CompanyList-company'>
+        {companies.map((company) => (
+          <Card className='mb-3' key={company.handle} tag={Link} to={`/companies/${company.handle}`} style={{ cursor: 'pointer', textDecoration: 'none' }}>
+            <CardBody>
+              <CardTitle tag="h6">{company.name}</CardTitle>
+              <CardText>{company.description}</CardText>
+            </CardBody>
+          </Card>
+        ))}
+      </div>
     </section>
   );
 };

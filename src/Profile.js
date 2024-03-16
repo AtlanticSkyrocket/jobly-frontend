@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 
 import { useUserContext } from './UserContext';
 import JoblyApi from './api';
+
+import './Profile.css';
 
 const Profile = () => {
   const [message, setMessage] = useState('');
@@ -10,7 +12,7 @@ const Profile = () => {
   const { user } = useUserContext();
   const [userDetails, setUserDetails] = useState({
     username: '',
-    firstName: '',  
+    firstName: '',
     lastName: '',
     email: ''
   });
@@ -33,8 +35,7 @@ const Profile = () => {
         email: userDetails.email
       };
       const results = await JoblyApi.updateUserProfile(user.username, detailsToUpdate);
-      setMessage(true);
-        
+
     } catch (error) {
       setError(error);
       console.error(error);
@@ -46,7 +47,7 @@ const Profile = () => {
       const userRes = await JoblyApi.getCurrentUser(user.username);
       setUserDetails({
         username: userRes.username,
-        firstName: userRes.firstName,  
+        firstName: userRes.firstName,
         lastName: userRes.lastName,
         email: userRes.email
       });
@@ -55,53 +56,57 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
-    <Form onSubmit={handleSubmit}>
-      <FormGroup>
-        <Label for="username">Username</Label>
-        <Input
-          type="text"
-          name="username"
-          id="username"
-          value={userDetails.username}
-          disabled
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="firstName">First Name</Label>
-        <Input
-          type="text"
-          name="firstName"
-          id="firstName"
-          value={userDetails.firstName}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="lastName">Last Name</Label>
-        <Input
-          type="text"
-          name="lastName"
-          id="lastName"
-          value={userDetails.lastName}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          value={userDetails.email}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      {error && <Alert>{error}</Alert>}
-      {message && <Alert>{message}</Alert>}
-      <Button type="submit">Submit</Button>
-    </Form>
-    </div>
+    <Row className="align-self-center">
+      <Col md="3" />
+      <Col md="6" className="align-items-center">
+        <h1 className="text-left">Profile</h1>
+        <Form className="profile-form" onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label for="username">Username</Label>
+            <Input
+              type="text"
+              name="username"
+              id="username"
+              value={userDetails.username}
+              disabled
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="firstName">First Name</Label>
+            <Input
+              type="text"
+              name="firstName"
+              id="firstName"
+              value={userDetails.firstName}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="lastName">Last Name</Label>
+            <Input
+              type="text"
+              name="lastName"
+              id="lastName"
+              value={userDetails.lastName}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="email">Email</Label>
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              value={userDetails.email}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          {error && error !== '' && <Alert className="form-alert">{error}</Alert>}
+          <Button className="full-width-button" color="primary" type="submit">Save Changes</Button>
+        </Form>
+      </Col>
+      <Col md="3" />
+    </Row>
   );
 };
 

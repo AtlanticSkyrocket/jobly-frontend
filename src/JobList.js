@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, ListGroup, ListGroupItem } from 'reactstrap';
 
-import { useUserContext } from './UserContext.js';
 import JobCard from './JobCard.js';
 import JoblyApi from './api.js';
 import SearchForm from './SearchForm.js';
@@ -41,13 +39,11 @@ const JobList = () => {
   return (
     <section className='col-md-10'>
       <SearchForm filterList={searchJobList}/>
-        <ListGroup>
+        <div>
           {jobs && jobs.map((job) => 
-          <ListGroupItem key={job.id}>
             <JobCard job={job} />
-          </ListGroupItem>
           )}
-        </ListGroup>
+        </div>
     </section>
   );
 };

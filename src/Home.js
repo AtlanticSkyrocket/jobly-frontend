@@ -6,37 +6,40 @@ import { useUserContext } from './UserContext';
 function Home() {
   const { user } = useUserContext();
   return (
-    <Container className="Home d-flex vh-100">
-      <Row className="m-auto align-self-center">
+    <Container className="Home d-flex vh-100 align-items-center justify-content-center">
+      <Row>
         <Col className="text-center">
-          <h3>Jobly</h3>
-          <span>All the jobs in one, convenient place</span>
+          <h1>Jobly</h1>
+          <h4 className="mt-4">All the jobs in one, convenient place</h4>
           {
             (user) ?
               (
-                <div className="mt-4">
-                  <Nav>
-                    <NavItem className="d-inline-flex">
-                      <NavLink tag={Link} to="/companies">
-                        <Button color="primary" className="me-2">Companies</Button>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem className="d-inline-flex">
-                      <NavLink tag={Link} to="/jobs">
-                        <Button color="primary">Jobs</Button>
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
+                <div>
+                  <h3 className="mt-4">Welcome back, {user.username}!</h3>
+                  <div >
+                    <Nav className="mt-4 justify-content-center">
+                      <NavItem >
+                        <NavLink tag={Link} to="/companies">
+                          <Button color="primary" className="me-2">Companies</Button>
+                        </NavLink>
+                      </NavItem>
+                      <NavItem >
+                        <NavLink tag={Link} to="/jobs">
+                          <Button color="primary">Jobs</Button>
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                  </div>
                 </div>
               ) : (
-                <div className="mt-4">
-                  <Nav>
-                    <NavItem className="d-inline-flex">
+                <div>
+                  <Nav className="mt-4 justify-content-center"> 
+                    <NavItem>
                       <NavLink tag={Link} to="/signup">
                         <Button color="primary" className="me-2">Signup</Button>
                       </NavLink>
                     </NavItem>
-                    <NavItem className="d-inline-flex">
+                    <NavItem>
                       <NavLink tag={Link} to="/login">
                         <Button color="primary">Login</Button>
                       </NavLink>

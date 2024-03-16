@@ -14,15 +14,18 @@ function JobCard({ job }) {
   useEffect(() => {
     setHasApplied(applications.includes(job.id));
   }, [applications, job.id]);
+
   return (
-    <Card>
+    <Card className='mb-3' key={job.id}>
       <CardBody>
-        <CardTitle tag="h5">{job.title}</CardTitle>
+        <CardTitle tag="h6">{job.title}</CardTitle>
         <CardText>Salary: {job.salary}</CardText>
         <CardText>Equity: {job.equity}</CardText>
-        <Button color="primary" onClick={handleApply} disabled={hasApplied}>
-          {hasApplied ? 'Applied' : 'Apply'}
-        </Button>
+        <div className="d-flex justify-content-end">
+          <Button color="danger" onClick={handleApply} disabled={hasApplied}>
+            {hasApplied ? 'Applied' : 'Apply'}
+          </Button>
+        </div>
       </CardBody>
     </Card>
   );

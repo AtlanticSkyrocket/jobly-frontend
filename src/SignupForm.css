@@ -1,0 +1,15 @@
+.signup-form {
+  background-color: white;
+  border-radius: 0.25rem;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.signup-form label {
+  font-weight: bold;
+}
+
+.full-width-button {
+  width: 100%;
+}
