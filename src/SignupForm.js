@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 
 import { useUserContext } from './UserContext';
-import JoblyApi from './api';
 
 import './SignupForm.css';
 
 const SignupForm = () => {
-  const { setUser } = useUserContext();
+  const { singUpUser } = useUserContext();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     email: ''
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,13 +27,12 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const results = await JoblyApi.loginUser(formData);
-    if (results === 'error') {
-      console.log('Invalid username or password');
-    } else {
-      JoblyApi.token = results;
-      setUser({ username: formData.username });
+    const signUpRes = await singUpUser(formData);
+    if (signUpRes) {
       console.log('User logged in');
+      navigate('/');
+    } else {
+      console.log('Invalid username or password');
     }
   };
 
@@ -66,9 +66,9 @@ const SignupForm = () => {
             <Label for="firstname">First Name</Label>
             <Input
               type="text"
-              name="firstname"
-              id="firstname"
-              value={formData.firstname}
+              name="firstName"
+              id="firstName"
+              value={formData.firstName}
               onChange={handleChange}
             />
           </FormGroup>
@@ -76,9 +76,9 @@ const SignupForm = () => {
             <Label for="lastname">Last Name</Label>
             <Input
               type="text"
-              name="lastname"
-              id="lastname"
-              value={formData.lastname}
+              name="lastName"
+              id="lastName"
+              value={formData.lastName}
               onChange={handleChange}
             />
           </FormGroup>

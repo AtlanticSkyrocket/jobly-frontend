@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
 import { useParams } from 'react-router-dom';
 
 import JoblyApi from './api';

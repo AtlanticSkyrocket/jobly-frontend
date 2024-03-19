@@ -36,8 +36,9 @@ class JoblyApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
-
+  /** Get details on a company by handle. 
+   * handle: a string that is the company handle
+  */
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
@@ -49,16 +50,22 @@ class JoblyApi {
     return res.job;
   }
 
-  /** Get list of companies */
+  /** Get list of companies 
+   * filter: an object that can contain the following keys:
+   * - name: a string that is the company name
+  */
 
   static async getCompanies(filter) {
     let res = await this.request(`companies`, filter);
     return res.companies;
   }
 
-  /** Get list of jobs */
-  static async getJobs() {
-    let res = await this.request(`jobs`);
+  /** Get list of jobs 
+   * filter: an object that can contain the following keys:
+   * - title: a string that is the job title
+  */
+  static async getJobs(filter) {
+    let res = await this.request(`jobs`, filter);
     return res.jobs;
   }
 
@@ -74,22 +81,37 @@ class JoblyApi {
     return res.user;
   }
 
-  /** Apply to a job */
+  /** Apply to a job 
+   * username: a string that is the username
+   * jobId: a string that is the job id
+  */
   static async applyToJob(username, jobId) {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
     return res.applied;
   }
 
-  /** Login user */
+  /** Login user 
+   * data: an object that can contain the following keys:
+   * - username: a string that is the username
+   * - password: a string that is the password
+  */
   static async loginUser(data) {
     let res = await this.request(`auth/token`, data, "post");
     return res.token;
   }
-}
 
-// for now, put token ("testuser" / "password" on class)
-JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  /** Register user 
+   * data: an object that can contain the following keys:
+   * - username: a string that is the username
+   * - password: a string that is the password
+   * - firstName: a string that is the first name
+   * - lastName: a string that is the last name
+   * - email: a string that is the email
+  */
+  static async registerUser(data) {
+    let res = await this.request(`auth/register`, data, "post");
+    return res.token;
+  }
+}
 
 export default JoblyApi;

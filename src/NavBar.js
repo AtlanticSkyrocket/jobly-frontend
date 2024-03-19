@@ -37,7 +37,7 @@ function NavBar() {
                 <NavLink tag={Link} to="/profile">Profile</NavLink>
               </NavItem>
               <NavItem> 
-                <NavLink onClick={handleLogout} href="/" style={{ cursor: 'pointer' }}>
+                <NavLink onClick={handleLogout} style={{ cursor: 'pointer' }}>
                   Logout {user.username}
                 </NavLink>
               </NavItem>

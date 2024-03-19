@@ -4,9 +4,9 @@ import { Alert } from 'reactstrap';
 
 import './SearchForm.css';
 
-const SearchForm = ({ filterList}) => {
+const SearchForm = ({ filterList, searchFor}) => {
   const [formData, setFormData] = useState({
-    searchFor: ''
+   [searchFor] : ''
   });
   const [error, setError] = useState(false);
 
@@ -21,7 +21,7 @@ const SearchForm = ({ filterList}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-      await filterList((formData.searchFor === '') ? {} : {name: formData.searchFor});
+      await filterList((formData[searchFor] === '') ? {} : {[searchFor]: formData[searchFor]});
     } catch (error) {
       console.error(error);
       setError(true);
@@ -29,18 +29,18 @@ const SearchForm = ({ filterList}) => {
   };
 
   return (
-    <section>
+    <div>
       <Row className="justify-content-center">
-        <Col md={10}>
+        <Col>
       <Form className="SearchForm" onSubmit={handleSubmit}>
-        <Row className="row-cols-lg-auto g-3 align-items-center">
+        <Row form>
           <Col md={9}>
             <Input
               type="text"
-              name="searchFor"
+              name={searchFor}
               id="searchFor"
               placeholder="Search"
-              value={formData.searchFor}
+              value={formData[searchFor]}
               onChange={handleInputChange}
             />
           </Col>
@@ -52,7 +52,7 @@ const SearchForm = ({ filterList}) => {
       {error && <Alert color="danger">There was an unexpected error</Alert>}
       </Col>
       </Row>
-    </section>
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ const JobList = () => {
 
   const searchJobList = async (formData) => {
     try {
-      const filteredJobs = await JoblyApi.getCompanies(formData);
+      const filteredJobs = await JoblyApi.getJobs(formData);
       setJobs(filteredJobs);
     } catch (error) {
       console.error('Error fetching jobs:', error);
@@ -38,7 +38,7 @@ const JobList = () => {
   }
   return (
     <section className='col-md-10'>
-      <SearchForm filterList={searchJobList}/>
+      <SearchForm filterList={searchJobList} searchFor="title"/>
         <div>
           {jobs && jobs.map((job) => 
             <JobCard job={job} />

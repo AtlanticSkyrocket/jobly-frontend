@@ -35,7 +35,7 @@ const CopanyList = () => {
 
   return (
     <section className='col-md-8'>
-      <SearchForm filterList={searchCompanyList}/>
+      <SearchForm filterList={searchCompanyList} searchFor="name"/>
       <div className='CompanyList-company'>
         {companies.map((company) => (
           <Card className='mb-3' key={company.handle} tag={Link} to={`/companies/${company.handle}`} style={{ cursor: 'pointer', textDecoration: 'none' }}>

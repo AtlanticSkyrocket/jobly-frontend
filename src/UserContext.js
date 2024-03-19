@@ -52,6 +52,25 @@ export function UserProvider({ children }) {
     localStorage.removeItem('joblyUsername');
   };
 
+  const singUpUser = async (formData) => {
+    try {
+      const tokenRes = await JoblyApi.registerUser(formData);
+      if (tokenRes !== 'error') {
+        JoblyApi.token = tokenRes;
+        setToken(tokenRes);
+        localStorage.setItem('joblyToken', tokenRes);
+        localStorage.setItem('joblyUsername', formData.username);
+  
+        const userRes = await JoblyApi.getCurrentUser(formData.username);
+        setUser({ username: formData.username, applications: userRes.applications });
+        return true;
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+    }
+    return false;
+  }
+
   useEffect(() => {
     if (token) {
       localStorage.setItem('joblyToken', token);
@@ -91,7 +110,7 @@ export function UserProvider({ children }) {
   }, [token, user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser: setUserValue, applications, applyToJob, login, logout }}>
+    <UserContext.Provider value={{ user, setUser: setUserValue, applications, applyToJob, login, logout, singUpUser }}>
       {children}
     </UserContext.Provider>
   );
